@@ -46,14 +46,15 @@ Each test case is organized in the following structure:
     │   └── program.txt (original program converted to readable text)
     ├── reference/
     │   └── program.py
-    ├── evaluation/
-    │  ├── expected_documentation.md
-    │  └── test_cases.json
-    ├──  LLM1
-    │   └── python code/
-    │         ├── program.py
-    │         ├── log of the LLM instructions given to product the code
-    │         └── Evaluation of the code performed by individuals.
+    └── evaluation/
+       ├── expected_documentation.md
+       └── test_cases.json
+       └──  LLM1
+          ├── python_code_log_evaluation/
+          │   ├── program.py
+          │   ├── log of the LLM instructions given to product the code
+              └── Evaluation of the code performed by individuals.
+...
 ```
 
 ## Evaluation Metrics
