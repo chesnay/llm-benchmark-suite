@@ -2,20 +2,18 @@
 
 LLM are assessed based on benchmarks, but could this create a risk of overfitting?
 
-We propose to use tasks, which are not yet available directly on the internet using old computer code starting by classic 8-bit computers (Amstrad, Commodore 64). These programs are kept on tapes or disc and need to be converted to text first, prior to being used as test cases. This limits the risk that the LLM have already been trained on them.
-The first program is football manager a game from 1984.
+We propose to use tasks, which are not yet available directly on the internet with old computer code starting by classic 8-bit computers (Amstrad). These games of strategy are kept on tapes or disc and need to be converted to text first, prior to being used as test cases. This limits the risk that the LLM have already been trained on them.
 
 ## Project Overview
 
 This project evaluates LLMs' capabilities in:
 - Understanding business logic using code on which the LLM have not been trained, thus avoiding overfitting.
-- Documenting historical programs' functionality and architecture
-- Translating vintage BASIC programs to modern Python
-- Preserving original program logic while leveraging modern programming practices
+- Translating undocumented BASIC programs to modern Python an thus demonstrating an understanding of the underlying business logic.
+
 
 ## Benchmark Structure
 
-Each test case in the suite contains:
+Each test case (a game of strategy) in the suite contains:
 1. Original source code in text format
 2. Expected documentation outputs:
    - Program purpose and functionality
@@ -34,30 +32,28 @@ Each test case in the suite contains:
 
 ## Test Cases
 
-The benchmark includes programs from various domains:
-- Business applications (accounting, inventory)
-- Educational software
-- Simple games
-- Data processing utilities
+The benchmark includes strategy games in Basic.
+
+The first program is football manager a game from 1984 for the Amstrad CPC.
+The second program is called Don Juan, a strategic game of seduction :).
+Both of these games can be played using online emulators.
+
 
 Each test case is organized in the following structure:
 ```
-test_cases/
-├── program_name/
-│   ├── original program/
-│   │   └── program.txt (original program converted to readable text)
-│   ├── reference/
-│   │   └── program.py
-│   └── evaluation/
-       ├── expected_documentation.md
-       └── test_cases.json
-```
-
-## Usage
-
-Run benchmark:
-```python
-python run_benchmark.py --model [llm-name] --api-key [your-api-key]
+└── program_name/
+   ├── original program/
+    │   └── program.txt (original program converted to readable text)
+    ├── reference/
+    │   └── program.py
+    └── evaluation/
+    │  ├── expected_documentation.md
+    │  └── test_cases.json
+    ├──  LLM1
+    │   └── python code/
+    │         ├── program.py
+    │         ├── log of the LLM instructions given to product the code
+    │         └── Evaluation of the code performed by individuals.
 ```
 
 ## Evaluation Metrics
@@ -66,6 +62,7 @@ The benchmark evaluates LLMs on:
 1. Code Understanding
    - Accuracy of program documentation
    - Identification of key algorithms
+   - Whether name given to variables follow a business logic
    - Business logic comprehension
 
 2. Code Translation
