@@ -1,4 +1,4 @@
-# llm-benchmark-suite
+# LLM-benchmark-suite
 
 LLM are assessed based on benchmarks, but could this create a risk of overfitting?
 
