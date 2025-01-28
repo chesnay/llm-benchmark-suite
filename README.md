@@ -42,11 +42,11 @@ Both of these games can be played using online emulators.
 Each test case is organized in the following structure:
 ```
 └── program_name/
-   ├── original program/
+    ├── source code/
     │   └── program.txt (original program converted to readable text)
     ├── reference/
     │   └── program.py
-    └── evaluation/
+    ├── evaluation/
     │  ├── expected_documentation.md
     │  └── test_cases.json
     ├──  LLM1
