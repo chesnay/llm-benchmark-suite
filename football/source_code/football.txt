@@ -1,0 +1,742 @@
+1 CALL &BB48:KEY DEF 66,0,255: DIM p$(24):DIM a$(7):DIM t$(64):DIM c(16):DIM p(24): DIM t(16):DIM x(2):DIM l$(7):DIM u(5):DIM z(17):DIM b(16):DIM y(24):DIM r(24):DIM v(24)
+2 re=0:l=0:m=100000:s5=0:s1=0:s=0:ho=0:aw=0:te$=STRING$(40,"*"):gp=0
+3 DIM u$(16):DIM cl(64,2):DIM mt(8,4):DIM x%(19,12):DIM y%(19,12):DIM z%(19,12)
+4 CALL &BBFF:PAPER 0:PEN 1
+5 DEF FN r(x)=INT(RND(1)*x+1)
+6 CLS: PRINT"Football Manager":PRINT"Copyright Addictive Games 1984"
+9 GOSUB 9000:WHILE INKEY$<>"":WEND
+10 CLS:PRINT CHR$(7): INPUT "Type your name ";m$
+12 IF LEN(m$)<21 THEN GOTO 100
+15 PRINT"Name too long: max 20 characters!":FOR i=1 TO 2000:NEXT:m$="":GOTO 10
+50 SOUND 1,0,100,3,0,0,1
+55 RETURN
+90 FOR k=1 TO 1000:NEXT:RETURN
+100 GOSUB 8900
+101 RANDOMIZE TIME:GOSUB 2000
+110 IF i$="k" THEN 800
+120 GOSUB 4000
+130 GOSUB 8000
+140 GOSUB 8100
+150 GOSUB 8700
+199 GOTO 101
+200 DI: GOSUB 208
+201 EVERY 50,2 GOSUB 50
+202 GOSUB 224
+204 GOSUB 246
+206 RETURN
+208 BORDER 9
+210 INK 0,9:PAPER 0
+212 CLS
+214 IF h=1 THEN s3=cl(t1,1):s4=cl(v1,1):IF s3=s4 THEN s4=cl(v1,2)
+216 IF h=2 THEN s3=cl(v1,1):s4=cl(t1,1):IF s3=s4 THEN s3=cl(v1,2)
+218 IF h=2 THEN s2=2 ELSE s2=3
+222 RETURN
+224 EI: i=INT(RND(1)*2)+1:fl=0:gp=0
+226 ON i GOSUB 256,280
+228 IF fl=1 THEN 242
+230 dt=d:cl=0:nf=0
+232 GOSUB 330
+234 GOSUB 366
+236 GOSUB 460
+238 IF cl=2 OR cl=3 THEN 236
+240 IF cl=1 THEN GOSUB 588
+242 IF am(xh)+am(xa)=0 THEN RETURN
+244 GOTO 224
+246 BORDER 1: PAPER 0:PEN 1:CLS
+248 CALL &BBFF
+250 x= REMAIN(2)
+252 x=REMAIN(3)
+254 RETURN
+256 CLG: REM home attack
+258 IF am(1)=0 THEN fl=1:RETURN
+260 am(1)=am(1)-1:d=1
+262 sr=16:yp=20:yr=2:bs=1:GOSUB 304
+264 sr=14:yp=22:yr=2:bs=4:GOSUB 304
+266 INK 2,s3:INK 3,s4
+268 s2=2
+270 GOSUB 312
+272 GOSUB 322
+274 GOSUB 340
+276 GOSUB 596
+278 RETURN
+280 CLG: REM away attack
+282 IF am(2)=0 THEN fl=1:RETURN
+284 am(2)=am(2)-1:d=-1
+286 sr=26:yp=20:yr=2:bs=1:GOSUB 304
+288 sr=28:yp=22:yr=2:bs=4:GOSUB 304
+290 INK 2,s4:INK 3,s3
+292 s2=3
+294 GOSUB 312
+296 GOSUB 326
+298 GOSUB 354
+300 GOSUB 596
+302 RETURN
+304 FOR i=bs TO bs+2
+306 mt(i,1)=sr:mt(i,3)=INT(RND(1)*yr+yp):yr=yr+1
+308 sr=sr+6*d:yp=yp-5:NEXT
+310 RETURN
+312 i=INT(RND(1)*3)+4:FOR q=1 TO 8:mt(q,4)=0:NEXT
+314 mt(8,1)=mt(i,1)+d
+316 mt(i,4)=1
+318 FOR q=3 TO 4:mt(8,q)=mt(i,q):NEXT
+320 RETURN
+322 mt(7,1)=34:mt(7,3)=15:mt(7,4)=0
+324 RETURN
+326 mt(7,1)=7:mt(7,3)=15:mt(7,4)=0
+328 RETURN
+330 PAPER 0
+332 FOR i=1 TO 6:PLOT 1,400,(2-1*(i<4)):MOVE (mt(i,1)-1)*16,(26-mt(i,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5); CHR$(230+3*d);:NEXT
+334 PLOT 1,400,3:MOVE (mt(7,1)-1)*16,(26-mt(7,3))*16:PRINT CHR$(5); CHR$(230-3*d); 
+336 PLOT 1,400,1:MOVE (mt(8,1)-1)*16,(26-mt(8,3))*16:PRINT CHR$(5); CHR$(231-(5*(d=1)));
+338 RETURN
+340 PAPER 0: CLS:GOSUB 9380:PAPER 0:INK 1,26:PEN 1:PRINT sp$;:PAPER s2:PRINT STRING$(80," "):PLOT 1,352,1:DRAW 640,352,1
+342 PLOT 120,1,1:DRAW 640,1:DRAW 496,288:DRAW 152,288
+344 PLOT 616,48:DRAW 448,48:DRAW 408,240:DRAW 520,240
+346 PLOT 640,96:DRAW 616,160:DRAW 592,160:DRAW 592,96:DRAW 528,96:DRAW 488,208
+348 DRAW 536,208:DRAW 536,256:DRAW 592,160:MOVE 536,256:DRAW 552,256:DRAW 576,208
+350 PEN 1
+352 RETURN
+354 PAPER 0: CLS:GOSUB 9380:PAPER 0:INK 1,26:PEN 1:PRINT sp$;:PAPER s2:PRINT STRING$(80," "):PLOT 1,352,1:DRAW 640,352,1
+356 PLOT 520,1,1:DRAW 1,1:DRAW 144,288:DRAW 488,288:PLOT 24,48:DRAW 192,48:DRAW 230,240:DRAW 120,240
+358 PLOT 1,96:DRAW 24,160:DRAW 48,160:DRAW 48,96:DRAW 112,96:DRAW 156,208:DRAW 104,208:DRAW 104,256:DRAW 48,160
+360 MOVE 104,256:DRAW 88,256:DRAW 64,208
+362 PEN 1
+364 RETURN
+366 FOR i=1 TO 4
+368 x=226-1*(i=2 OR i=4):x1=226-1*(i=1 OR i=3)
+370 GOSUB 404
+372 NEXT
+374 FOR i=1 TO 6
+376 PLOT 1,400,(2-1*(i<4)):MOVE (mt(i,1)-1)*16,(26-mt(i,3))*16
+378 PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(230+3*d);
+380 MOVE (mt(i,1)-1)*16,(26-mt(i,3))*16
+382 IF mt(i,4)=1 THEN yh=i:GOSUB 394:GOTO 386
+384 PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(230);
+386 NEXT
+388 FOR i=1 TO 7:IF mt(i,4)=1 THEN i2=i
+390 NEXT
+392 RETURN
+394 PLOT 1,400,(2-1*(yh<4)):MOVE (mt(yh,1)-1)*16,(26-mt(yh,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(229+3*dt);:SOUND 4,2000,10,15
+396 RETURN
+398 PLOT 1,400,(2-1*(yh<4)):MOVE (mt(yh,1)-1)*16,(26-mt(yh,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(229+3*dt);
+400 MOVE (mt(yh,1)-1)*16,(26-mt(yh,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(230);
+402 RETURN
+404 FOR i2=1 TO 6
+406 z=INT((mt(i2,3)-8)/6+1)
+408 IF mt(i2,4)=1 THEN GOSUB 554:GOTO 414
+410 ON z GOSUB 418,434,438
+412 GOSUB 422
+414 NEXT
+416 RETURN
+418 mt(i2,2)=mt(i2,3): mt(i2,3)=mt(i2,3)+1
+420 RETURN
+422 PLOT 1,400,(2-1*(i2<4)):MOVE (mt(i2,1)-1)*16,(26-mt(i2,2))*16
+424 PEN 1:PAPER 2
+426 PRINT CHR$(23);CHR$(1);CHR$(5);CHR$((x1+3)+3*d);
+428 mt(i2,1)=mt(i2,1)+d 
+430 PLOT 1,400,(2-1*(i2<4)):MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16:PRINT CHR$(23);CHR$(1); CHR$(5); CHR$((x+3)+3*d);
+432 RETURN
+434 mt(i2,2)=mt(i2,3): mt(i2,3)=mt(i2,3)+INT(RND(1)*3-1)
+436 RETURN
+438 mt(i2,2)=mt(i2,3): mt(i2,3)=mt(i2,3)-1
+440 RETURN
+442 tt=SGN(mt(7,3)-mt(8,3))*2
+444 PLOT 1,400,3:MOVE (mt(7,1)-1)*16,(26-mt(7,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(ba-x*(gp/2<>INT(gp/2)));
+446 mt(7,3)=mt(7,3)-(tt/2)
+448 mt(7,1)=mt(7,1)+((SGN(tt)*-dt)/2)
+450 REM IF mt(7,3)>20 THEN mt(7,3)=20:mt(7,1)=mt(7,1)-((SGN(tt)*-dt)/2)
+452 REM IF mt(7,3)<12 THEN mt(7,3)=12:mt(7,1)=mt(7,1)-((SGN(tt)*-dt)/2) 
+454 PLOT 1,400,3:MOVE (mt(7,1)-1)*16,(26-mt(7,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(ba-x*(gp/2=INT(gp/2)));
+456 gp=gp+1
+458 RETURN
+460 FOR i=1 TO 7:IF mt(i,4)=1 THEN i2=i
+462 NEXT
+464 z=INT((mt(i2,3)-8)/6+1)
+466 ON z GOSUB 476,480,484
+468 ax=FN r(2)
+470 IF ay=0 AND i2=7 THEN GOSUB 480:GOTO 470
+472 GOSUB 488
+474 RETURN
+476 ay=FN r(2)-1
+478 RETURN
+480 ay=INT(RND(1)*3)-1
+482 RETURN
+484 ay=INT(RND(1)*2)*-1
+486 RETURN
+488 IF i2=7 THEN GOSUB 580:GOTO 502
+490 IF cl=0 THEN 502
+492 PLOT 1,400,(2-1*(i2<4)):MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16: PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(230);
+494 MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16
+496 SOUND 4,2000,10,15:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(239-1*(dt=1));
+498 PLOT 1,400,(2-1*(i2<4)):MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16:FOR q=1 TO 500:NEXT:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(239-1*(dt=1));
+500 SOUND 4,2000,10,15: MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(230);
+502 PLOT 1,400,1:MOVE (mt(8,1)-1)*16,(26-mt(8,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(231-(5*(dt=1)));
+504 mt(8,1)=mt(8,1)+d*ax
+506 mt(8,3)=mt(8,3)+ay/2
+508 PLOT 1,400,1:MOVE (mt(8,1)-1)*16,(26-mt(8,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(231-(5*(dt=1)));
+510 cl=0:GOSUB 522
+512 IF cl<>0 THEN RETURN
+514 ba=227-6*(dt=-1):x=4-7*(dt=1):IF d=dt AND FN r(4)=4 THEN GOSUB 442
+516 IF nf=0 THEN GOSUB 398
+518 nf=1
+520 GOTO 502
+522 IF 26-mt(8,3)>ABS((mt(8,1)+(41*(d=1)))*2) THEN 524 ELSE 528
+524 IF mt(8,3)<12 OR mt(8,3)>19 THEN cl=4: GOTO 550
+526 IF d=dt THEN cl=1:GOTO 550
+528 IF mt(8,3)>24 AND mt(8,3)<8 THEN cl=4:GOTO 550
+530 IF mt(8,1)<1 OR mt(8,1)>40 THEN cl=4:GOTO 550
+532 FOR i=1 TO 7
+534 IF mt(i,1)<>mt(8,1) THEN 544 
+536 IF mt(i,3)<>mt(8,3) THEN 544
+538 cl=2-1*(i<4)
+540 IF i=7 THEN cl=3
+542 GOTO 546
+544 NEXT
+546 IF cl=3 THEN d=dt*-1 ELSE IF cl=2 THEN d=dt 
+548 IF cl THEN mt(i2,4)=0:mt(i,4)=1
+550 RETURN
+552 REM
+554 i3=i2
+556 i2=8
+558 ON z GOSUB 418,434,438
+560 GOSUB 568
+562 i2=i3:mt(i2,2)=mt(i2,3):mt(i2,3)=mt(8,3)
+564 GOSUB 422
+566 RETURN
+568 PLOT 1,400,1:MOVE (mt(i2,1)-1)*16,(26-mt(i2,2))*16
+570 PRINT CHR$(23);CHR$(1);CHR$(5); CHR$(231-5*(d=1));
+572 mt(i2,1)=mt(i2,1)+d
+574 PLOT 1,400,1:MOVE (mt(i2,1)-1)*16,(26-mt(i2,3))*16
+576 PRINT CHR$(23);CHR$(1);CHR$(5); CHR$(231-5*(d=1));
+578 RETURN
+580 SOUND 4,2000,10,15: PLOT 1,400,3:MOVE (mt(7,1)-1)*16,(26-mt(7,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(ba-x*(gp/2<>INT(gp/2)));
+582 PLOT 1,400,3:MOVE (mt(7,1)-1)*16,(26-mt(7,3))*16:PRINT CHR$(23);CHR$(1);CHR$(5);CHR$(ba-x*(gp/2=INT(gp/2)));
+584 gp=gp+1
+586 RETURN
+588 s(2)=s(2)-1*(d=-1):s(1)=s(1)-1*(d=1)
+590 LOCATE 1,1: PAPER 0:INK 1,26:PEN 1:PRINT STRING$(120,CHR$(225));:PLOT 1,352,1:DRAW 640,352,1
+592 SOUND 4,0,200,15,0,0,2
+594 GOSUB 596: FOR q=1 TO 1000:NEXT
+596 LOCATE 3,5:PEN 1:PAPER s2
+598 GOSUB 1090
+600 RETURN
+800 CLS:PRINT"Place blank disc in drive               Press any key when ready"
+802 WHILE INKEY$="":WEND
+803 a$="savegame.*"
+804 |ERA,@a$
+808 OPENOUT "savegame"
+810 WRITE #9,t1,m,l,ml,ma,fa,s,s5,d1,d2,c,lt,p1,l1,a(2),m$
+820 FOR i=1 TO 64:WRITE #9,t$(i),cl(i,1),cl(i,2):NEXT
+830 FOR i=1 TO 24:WRITE #9,p$(i),p(i),v(i),y(i),r(i):NEXT
+840 FOR i=1 TO 16:WRITE #9,u$(i),z(i),b(i),c(i),t(i):NEXT
+890 CLOSEOUT
+899 RETURN
+900 CLS:PRINT"Place saved game disc in drive          Press any key when ready"
+902 WHILE INKEY$="":WEND
+908 OPENIN "savegame" 
+910 INPUT #9,t1,m,l,ml,ma,fa,s,s5,d1,d2,c,lt,p1,l1,a(2),m$  
+920 FOR i=1 TO 64:INPUT #9,t$(i),cl(i,1),cl(i,2):NEXT
+930 FOR i=1 TO 24:INPUT #9,p$(i),p(i),v(i),y(i),r(i):NEXT
+940 FOR i=1 TO 16:INPUT #9,u$(i),z(i),b(i),c(i),t(i):NEXT
+990 CLOSEIN
+999 RETURN
+1000 CLS
+1001 PRINT"Money in Bank (�):";TAB(20);USING"########";m
+1002 PRINT:PRINT"Money owed (�):";TAB(20);USING"########";l
+1009 RETURN
+1010 CLS:PRINT"YOU HAVEN'T ENOUGH MONEY!";CHR$(7)
+1015 RETURN
+1020 PRINT:PRINT a$(7);":";t(t1-lt);" League match no.:";ml
+1022 RETURN
+1030 PEN 3: LOCATE 1,23:PRINT"or press ENTER to continue":PEN 1:PRINT STRING$(40," ");STRING$(80,CHR$(8))
+1031 WHILE INKEY$<>"":WEND
+1032 RETURN
+1040 IF xz<1 THEN xz=1
+1041 IF xz>20 THEN xz=20
+1043 RETURN
+1050 CLS:PRINT"p : picked to play, i : injured"
+1053 RETURN
+1060 LOCATE 1,23
+1061 PEN 3: PRINT TAB(9);"Press ENTER to continue":PEN 1
+1062 WHILE INKEY$<>"":WEND
+1063 WHILE INKEY$<>CHR$(13):WEND
+1064 RETURN
+1070 PEN 3: LOCATE 1,23:PRINT"or press any key to continue":PEN 1
+1072 RETURN
+1090 PRINT t$(x(1));TAB(15);s(1);TAB(20);t$(x(2));TAB(32);s(2)
+1099 RETURN
+1100 PRINT TAB(15);a$(6);d1:PRINT
+1102 RETURN
+1120 p=0
+1122 p1=0
+1125 FOR i=1 TO 24
+1130 IF p(i)=2 THEN p=p+1
+1135 IF p(i)>0 THEN p1=p1+1
+1140 NEXT
+1142 PEN 1: LOCATE 1,21: PRINT"PLAYERS PICKED:";p
+1145 RETURN
+1160 xz=a(i):GOSUB 1040:a(i)=xz
+1169 RETURN
+2000 CLS:PEN 2:PRINT"TO -",,"TYPE -":PRINT:PEN 1:PRINT"Sell/list your players"," - a"
+2010 PRINT:PRINT"Print score etc."," - s"
+2015 PRINT:PRINT"Obtain a loan"," - o"
+2017 PRINT:PRINT"Pay off loan",," - p"
+2020 PRINT:PRINT"Display league table"," - d"
+2022 PRINT:PRINT"Change your":PRINT"  skill level"," - l"
+2024 PRINT:PRINT"Change team or":PRINT"  player names"," - c"
+2026 PRINT:PRINT"Save game",," - k"
+2028 PRINT:PRINT"Restore saved game"," - r"
+2040 GOSUB 1030
+2180 i$=INKEY$:IF i$="" THEN 2180
+2190 i$=LOWER$(i$)
+2200 IF i$="a" THEN GOSUB 2400:GOTO 2000
+2202 IF i$="o" THEN GOSUB 2800:GOTO 2000
+2204 IF i$="s" THEN GOSUB 3000:GOTO 2000
+2206 IF i$="p" THEN GOSUB 2900:GOTO 2000
+2208 IF i$="c" THEN GOSUB 9400:GOSUB 9500:GOTO 2000
+2210 IF i$="l" THEN GOSUB 3200:GOTO 2000
+2212 IF i$="k" THEN GOSUB 800:GOTO 2000
+2230 IF i$="d" THEN GOSUB 7805:GOTO 2000
+2240 IF i$="r" THEN GOSUB 900:GOTO 2000
+2250 IF i$<>CHR$(13) THEN 2000
+2299 RETURN
+2400 GOSUB 1050:GOSUB 2540
+2440 FOR i=1 TO 24
+2443 IF p(i)=0 THEN 2460
+2450 pl=i:PEN (INT((pl-1)/8+1)):PRINT r$(INT((pl-1)/8+1));" ";p$(pl);TAB(16);:PRINT USING"##";pl;:PRINT TAB(22);r(pl);TAB(29);USING"##";y(pl);:PRINT TAB(32); USING"######";v(pl);:PRINT" ";q$(p(pl)+ABS(p(pl)=0))
+2460 NEXT:PEN 1:GOSUB 1120
+2470 PRINT"Type no. of player to be sold"
+2471 GOSUB 1030
+2473 INPUT i:IF i=0 THEN 2539
+2476 IF i<1 OR i>24 THEN PRINT CHR$(7):GOTO 2400
+2477 IF p(i)=0 THEN PRINT CHR$(7):GOTO 2400
+2480 CLS:IF p(i)<>3 THEN 2482
+2481 PRINT:PRINT:PRINT"He is injured - nobody wants him!":GOSUB 1060:GOTO 2539
+2482 o=INT(((RND(1)*5+8)*v(i))/10)
+2484 x=FN r(64): i$=t$(x):IF i$=t$(t1) THEN 2484
+2485 PRINT:PRINT i$;" have offered �";o:PRINT"for ";p$(i):PRINT
+2486 PRINT"He is worth �";v(i):PRINT"Do you accept?";
+2487 i$=LOWER$(INKEY$):IF i$=""THEN 2487
+2492 IF i$="y" THEN 2500
+2494 GOTO 2535
+2500 p(i)=0:os=o:m=m+os:CLS
+2510 LOCATE 1,5:PRINT p$(i);" has been sold"
+2512 GOSUB 1060:GOTO 2539
+2535 IF FN r(3)=1 THEN 2539
+2536 p(i)=3
+2539 RETURN
+2540 PEN 3: PRINT"NAME           NO. SKILL ENERGY VALUE(�)"
+2545 RETURN
+2800 GOSUB 1000
+2805 PRINT:PRINT"Type loan amount required (�)":INPUT i:i=INT(i)
+2810 IF i+l<=250000*d2 THEN 2830
+2820 PRINT:PRINT"Sorry, your credit limit is �";250000*d2
+2825 GOSUB 1060:GOTO 2800
+2830 m=m+i:l=l+i:GOSUB 1000:GOSUB 1060:RETURN
+2900 GOSUB 1000
+2905 PRINT:PRINT"Type amount you want to pay off your    loan (�)":INPUT i:i=INT(i)
+2920 IF i>l THEN CLS:PRINT"YOU DON'T OWE THAT MUCH!":GOSUB 1060:GOTO 2900
+2925 IF i>m THEN GOSUB 1010:GOSUB 1030:GOTO 2900
+2930 l=l-i:m=m-i:GOSUB 1000
+2999 GOSUB 1060:RETURN
+3000 i$="***"+t$(t1)+"***":CLS
+3002 INK 2,cl(t1,1):PEN 2
+3003 PRINT TAB(INT((40-LEN(i$))/2));i$
+3005 PEN 1: PRINT:PRINT"Manager : ";m$
+3007 IF s5=0 THEN 3010
+3009 s1=INT(s/s5)*2:IF s1>100 THEN s1=100
+3010 PRINT:PRINT"Managerial Rating (Max 100):";s1
+3012 PRINT:PRINT"Level : ";l1;" ";l$(l1)
+3013 PRINT:PRINT"Seasons : ";s5:PRINT
+3020 GOSUB 1001:PRINT:PRINT a$(2);" : ";a(2)
+3030 GOSUB 1020:PRINT:GOSUB 1060:INK 2,23:RETURN
+3200 mr=1
+3205 CLS:PRINT"Your present skill level is :":PRINT:PRINT"Level ";l1,l$(l1)
+3207 PRINT:PRINT"The choices are :":PRINT:PRINT
+3210 GOSUB 8957
+3260 mr=0:RETURN
+4000 ma=ma+1:lc=2
+4005 IF ma=3 THEN ma=0:lc=1
+4010 IF fa=1 THEN lc=2
+4100 CLS::IF lc<>1 THEN 4120
+4110 c=c+1
+4118 v1=INT((8-c)*8+FN r(7))
+4119 IF v1=t1 THEN 4118
+4120 IF lc<>2 THEN 4140
+4125 ml=ml+1:v1=ml+lt
+4130 IF v1=t1 THEN v1=lt+16
+4140 FOR i=1 TO 5
+4150 IF lc=1 THEN u(i)=INT(FN r(16)+l1+((t1-1)/16)-((v1-1)/16+1))
+4152 IF lc=2 THEN u(i)=INT(FN r(14)+l1+(z(v1-lt)/ml))
+4155 xz=u(i):GOSUB 1040:u(i)=xz
+4160 NEXT
+4190 IF lc=1 THEN GOSUB 4500:h=FN r(2)
+4200 IF lc=2 THEN h=INT((1.5/h1)+1):h1=h
+4205 v=INT((1.5/h)+1)
+4210 ON lc GOSUB 4600,4700
+4220 PEN 2: x(h)=t1:x(v)=v1:s(1)=0:s(2)=0
+4230 IF lc=1 THEN PRINT"F.A. Cup Match : Round ";c$
+4232 IF lc=2 THEN PRINT"League Match : ";a$(6);d1
+4233 PEN 1
+4234 PRINT te$
+4240 PRINT:PRINT TAB(12);t$(x(1));" v ";t$(x(2))
+4241 PRINT:PRINT a$(5+lc);TAB(12);x1;TAB(20);x2
+4243 PRINT:PRINT te$
+4250 GOSUB 1060:GOSUB 6000:GOSUB 5000
+4320 PRINT:PRINT"Gate receipts : �";x9:PRINT:PRINT:m=m+x9:GOSUB 1060
+4329 IF lc=2 THEN 4340
+4330 IF s(h)<>s(v) THEN 4340
+4331 CLS:LOCATE 1,10:FOR i=1 TO 5:PRINT"*REPLAY*";:NEXT:PRINT:GOSUB 1060:CLS
+4336 h=INT((1.5/h)+1):v=INT((1.5/v)+1):GOTO 4210
+4340 ON lc GOSUB 5200,7000
+4350 IF s(h)>s(v) THEN a(2)=a(2)+INT((20-a(2))/2)
+4360 IF s(h)<s(v) THEN a(2)=INT(a(2)/2)
+4370 i=2:GOSUB 1160
+4380 IF lc=2 THEN GOSUB 7500:GOSUB 7729
+4499 RETURN
+4500 IF c<7 THEN c$=STR$(c)
+4510 IF c=7 THEN c$="Semi-Final"
+4520 IF c=8 THEN c$="Final"
+4530 RETURN
+4600 IF h=1 THEN x1=d1:x2=INT((v1-1)/16)+1:x9=g
+4610 IF h=2 THEN x1=INT((v1-1)/16)+1:x2=d1:x9=(5-x1)*10000
+4620 IF c=7 THEN x9=50000
+4622 IF c=8 THEN x9=100000
+4630 RETURN
+4700 IF h=1 THEN x1=t(t1-lt):x2=t(v1-lt):x9=g
+4710 IF h=2 THEN x1=t(v1-lt):x2=t(t1-lt):x9=(17-t(v1-lt))*d2*500
+4720 RETURN
+5000 CLS:PRINT"********MATCH HIGHLIGHTS TO FOLLOW******"
+5001 ho=ABS(h=1)*tco+ABS(h<>1)*(7-tco):aw=7-ho
+5005 IF h=1 THEN xh=1:xa=2
+5010 IF h=2 THEN xh=2:xa=1
+5015 am(1)=0:am(2)=0:s(1)=0:s(2)=0
+5020 FOR i=1 TO 5
+5040 am(xh)=am(xh)-2*((RND(1)*100)+(a(i)-u(i))*5>74)
+5050 am(xa)=am(xa)-2*((RND(1)*100)+(u(i)-a(i))*5>74)
+5060 NEXT
+5070 am(xh)=am(xh)-(am(xh)<1)
+5080 am(xa)=am(xa)-(am(xa)<1)
+5103 GOSUB 200
+5105 PEN 2: CLS:PRINT TAB(10);"****FINAL SCORE****":PRINT:PRINT:PRINT:PEN 1
+5106 GOSUB 1090:PRINT te$
+5110 RETURN
+5200 CLS
+5204 IF s(h)<s(v) THEN fa=1:a(2)=INT(a(2)/2):CLS:LOCATE 1,15:PRINT"********You're out of the Cup!!!********":GOTO 5265
+5210 IF c<8 THEN CLS:LOCATE 1,15:PRINT"***You are through to the next round!***"
+5212 IF c<>8 THEN 5260
+5213 INK 0,9:BORDER 9: CLS:PRINT"!!!!!!!!You've won the F.A. CUP!!!!!!!!"
+5215 SOUND 4,0,2000,15,0,0,2:fa=1
+5220 INK 2,9:INK 3,9
+5222 FOR l%=1 TO 11
+5224 FOR k%=1 TO 18
+5226 PLOT 320+x%(k%,l%),80+y%(k%,l%)-0.5*z%(k%,l%),2:xc%=(x%(k%,l%+1))-(x%(k%,l%)):yc%=(y%(k%,l%+1)-0.5*z%(k%,l%+1))-(y%(k%,l%)-0.5*z%(k%,l%)):DRAWR xc%,yc%
+5228 xc%=(x%(k%+1,l%+1))-(x%(k%,l%+1)):yc%=(y%(k%+1,l%+1)-0.5*z%(k%+1,l%+1))-(y%(k%,l%+1)-0.5*z%(k%,l%+1)):DRAWR xc%,yc%
+5230 NEXT:NEXT
+5232 FOR l%=1 TO 18:MOVE 320+x%(l%,12),80+y%(l%,12)-0.5*z%(l%,12):xc%=x%(l%,1)-x%(l%,12):yc%=(y%(l%,1)-0.5*z%(l%,1))-(y%(l%,12)-0.5*z%(l%,12)):DRAWR xc%,yc%
+5234 xc%=x%(l%+1,1)-x%(l%,1):yc%=y%(l%+1,1)-0.5*z%(l%+1,1)-y%(l%,1)-0.5*z%(l%,1):DRAWR xc%,yc%
+5236 NEXT
+5240 PLOT 416,304:DRAW 410,314:DRAW 432,330:DRAW 456,320:DRAW 472,274:DRAW 456,228:DRAW 398,182:MOVE 416,304:DRAW 424,310:DRAW 432,320:DRAW 448,312:DRAW 460,274:DRAW 448,236:DRAW 394,194
+5245 PLOT 224,304:DRAW 230,314:DRAW 208,330:DRAW 184,320:DRAW 168,274:DRAW 184,228:DRAW 242,182:MOVE 224,304:DRAW 216,310:DRAW 208,320:DRAW 192,312:DRAW 180,274:DRAW 192,236:DRAW 246,194
+5247 PLOT 424,216,3:DRAW 448,252:DRAW 432,256:DRAW 424,216:DRAW 410,244:DRAW 430,250:MOVE 424,216:DRAW 388,202:DRAW 390,218:DRAW 424,216:DRAW 400,236:DRAW 396,218:MOVE 424,216:DRAW 424,204:DRAW 416,160:DRAW 416,112:DRAW 428,126:DRAW 440,112:DRAW 424,160
+5252 DRAW 436,214:DRAW 424,216:MOVE 436,214:DRAW 456,128:DRAW 442,134:DRAW 436,124:DRAW 432,186
+5254 PLOT 216,216:DRAW 192,252:DRAW 208,256:DRAW 216,216:DRAW 230,244:DRAW 210,250:MOVE 216,216:DRAW 252,202:DRAW 250,218:DRAW 216,216:DRAW 240,236:DRAW 244,218:MOVE 216,216:DRAW 216,204:DRAW 224,160:DRAW 224,112:DRAW 212,126:DRAW 200,112:DRAW 216,160
+5256 DRAW 204,214:DRAW 216,216:MOVE 204,214:DRAW 184,128:DRAW 198,134:DRAW 204,124:DRAW 208,186
+5258 INK 2,26:INK 3,cl(t1,1) 
+5260 a(2)=a(2)+INT((20-a(2))/2)
+5265 i=2
+5299 GOSUB 1160:GOSUB 1060:GOSUB 246:RETURN
+6000 IF ml=1 AND c=0 THEN 6112
+6020 FOR i=1 TO 24
+6030 y(i)=y(i)+ABS((p(i)=1)OR(p(i)=3))*10+ABS(p(i)=2)*-1
+6050 IF p(i)=3 THEN p(i)=1
+6060 xz=y(i):GOSUB 1040:y(i)=xz
+6070 IF p(i)=0 OR FN r(20)<20 THEN 6100
+6080 p(i)=3
+6100 NEXT
+6112 CLS:GOSUB 6500:GOSUB 1120
+6120 PRINT"Type t to change team"
+6130 GOSUB 1030
+6140 i$="":WHILE i$<>"t" AND i$<>CHR$(13):i$=LOWER$(INKEY$):WEND
+6142 IF i$="t" THEN 6145 ELSE GOTO 6339
+6145 GOSUB 1050:GOSUB 2540
+6150 FOR i=1 TO 24:IF p(i)=0 THEN 6180
+6160 pl=i:PEN (INT((pl-1)/8+1)):PRINT r$(INT((pl-1)/8+1));" ";p$(pl);TAB(16);:PRINT USING"##";pl;:PRINT TAB(22);r(pl);TAB(29);USING"##";y(pl);:PRINT TAB(32); USING"######";v(pl);:PRINT" ";q$(p(pl)+ABS(p(pl)=0))
+6180 NEXT:PEN 1
+6200 GOSUB 1120
+6205 IF p>11 THEN 6300
+6210 LOCATE 1,22: PRINT"Type player no. to add to team          "
+6215 GOSUB 1030
+6216 INPUT i:IF i=0 THEN 6112
+6220 IF i<1 OR i>24 THEN PRINT"PLAYER NUMBER OUT OF RANGE!";CHR$(7):GOSUB 90:GOTO 6145
+6225 IF p(i)<>1 THEN PRINT"PLAYER NOT AVAILABLE";CHR$(7):GOSUB 90:GOTO 6145
+6230 p(i)=2:q=1:q1=0
+6235 WHILE i<>q
+6240 IF p(q)>0 THEN q1=q1+1
+6242 q=q+1
+6245 WEND
+6248 LOCATE 1,q1+4:PRINT STRING$(40," ")
+6250 LOCATE 1,q1+4:pl=i:PEN (INT((pl-1)/8+1)):PRINT r$(INT((pl-1)/8+1));" ";p$(pl);TAB(16);:PRINT USING"##";pl;:PRINT TAB(22);r(pl);TAB(29);USING"##";y(pl);:PRINT TAB(32); USING"######";v(pl);:PRINT" ";q$(p(pl)+ABS(p(pl)=0))
+6255 GOSUB 1120:GOSUB 1030
+6290 GOTO 6205
+6300 LOCATE 1,22: PRINT"Type player no. to remove from team     ";STRING$(40," ");
+6305 WHILE INKEY$<>"":WEND
+6310 INPUT i
+6320 IF i<1 OR i>24 THEN PRINT"PLAYER NUMBER OUT OF RANGE!";CHR$(7):GOSUB 90:GOTO 6145
+6325 IF p(i)<>2 THEN PRINT"PLAYER NOT IN TEAM";CHR$(7):GOSUB 90:GOTO 6145
+6330 p(i)=1:q=1:q1=0
+6335 GOTO 6235
+6339 RETURN
+6500 FOR i=1 TO 5:a(i)=a(i)*ABS(i=2):NEXT
+6505 FOR i=1 TO 24
+6510 IF p(i)<>2 THEN 6550
+6520 q=INT((i-1)/8)+3:a(q)=a(q)+r(i):a(1)=a(1)+y(i)
+6550 NEXT
+6560 a(1)=INT(a(1)/11)
+6605 PEN 2: PRINT TAB(13);t$(t1);TAB(28);t$(v1):PRINT:PEN 1
+6610 FOR i=1 TO 5:GOSUB 1160
+6620 PRINT a$(i);TAB(16);USING"##";a(i);
+6625 PRINT TAB(28);USING"##";u(i)
+6630 NEXT
+6635 PRINT:PRINT:RETURN
+7000 b(t1-lt)=b(t1-lt)+s(h):c(t1-lt)=c(t1-lt)+s(v)    
+7010 b(v1-lt)=b(v1-lt)+s(v):c(v1-lt)=c(v1-lt)+s(h)
+7020 IF s(h)=s(v) THEN z(t1-lt)=z(t1-lt)+1:z(v1-lt)=z(v1-lt)+1:GOTO 7099
+7030 IF s(h)<s(v) THEN g=g-INT(g/10):g=g+(ABS(g<1000))*(1000-g):z(v1-lt)=z(v1-lt)+3:GOTO 7099
+7070 g=g+INT(((10000*d2)-g)/10):z(t1-lt)=z(t1-lt)+3
+7099 RETURN
+7500 CLS
+7510 PEN 2: PRINT"RESULTS : ";:GOSUB 1100:PEN 1
+7530 FOR i=1 TO 16:t(i)=0:NEXT
+7540 t(t1-lt)=1:t(v1-lt)=1
+7550 FOR i=1 TO 7:PRINT"*";
+7560 PRINT CHR$(8);"*";:r=FN r(16)
+7570 PRINT CHR$(8);" ";:IF t(r)=1 THEN 7560
+7580 t(r)=1
+7585 PRINT CHR$(8);"*";:r1=FN r(16)
+7590 PRINT CHR$(8);" ";:IF t(r1)=1 THEN 7585
+7610 t(r1)=1:r2=INT((z(r)/ml)+RND(1)*4):r3=INT((z(r1)/ml)+RND(1)*4)
+7630 PRINT CHR$(8);t$(r+lt);TAB(12);r2;TAB(22);t$(r1+lt);TAB(37);r3:PRINT
+7640 b(r)=b(r)+r2:b(r1)=b(r1)+r3
+7650 c(r)=c(r)+r3:c(r1)=c(r1)+r2
+7660 IF r2>r3 THEN z(r)=z(r)+3
+7670 IF r3>r2 THEN z(r1)=z(r1)+3
+7680 z(r)=z(r)+ABS(r2=r3):z(r1)=z(r1)+ABS(r2=r3)
+7690 NEXT
+7700 GOSUB 1060:RETURN
+7729 CLS:IF ml>1 THEN 7735
+7730 FOR i=1 TO 16:u$(i)=STR$(i):NEXT
+7735 ch=0:pa=1
+7737 FOR i=1 TO (16-pa)
+7738 q=VAL(u$(i)):q1=VAL(u$(i+1))
+7742 IF z(q)>z(q1) THEN 7800
+7744 IF z(q)<z(q1) THEN 7770
+7746 IF b(q)-c(q)>b(q1)-c(q1) THEN 7800
+7748 IF b(q)-c(q)<b(q1)-c(q1) THEN 7770
+7749 IF b(q)>=b(q1) THEN 7800
+7770 q2=VAL(u$(i)):u$(i)=u$(i+1):u$(i+1)=STR$(q2):ch=1
+7800 NEXT
+7801 pa=pa+1:IF ch>0 THEN 7735
+7805 IF ml=0 THEN 7899
+7806 PEN 2: CLS:PRINT"POS TEAM";TAB(21);"F   A    PTS":PRINT:PEN 1
+7808 FOR i=1 TO 16:q1=VAL(u$(i))+lt
+7809 IF q1=t1 THEN PEN 2 ELSE PEN 1
+7810 PRINT USING"##";i;:PRINT"  ";t$(q1);TAB(20);USING"##";b(q1-lt);:PRINT TAB(24);USING"##";c(q1-lt);:PRINT TAB(30);USING"##";z(q1-lt)
+7820 t(q1-lt)=i
+7830 NEXT
+7840 GOSUB 1020:PRINT:GOSUB 1060
+7899 RETURN
+8000 CLS:w=0
+8020 FOR i=1 TO 24:IF p(i)>0 THEN w=w+r(i)*100*d2
+8025 NEXT
+8030 i=30
+8032 PEN 2: PRINT TAB(10);"****WEEKLY BILLS****":PRINT:PRINT"INCOME":PRINT:PEN 1
+8033 PRINT"  Gate receipts";TAB(i);USING"######";x9
+8034 PRINT"  Sale of players";TAB(i);USING"######";os
+8035 PEN 3: PRINT"TOTAL";TAB(i);USING"######";os+x9:PRINT:PRINT:PEN 2
+8036 PRINT"EXPENDITURE":PRINT
+8040 PEN 1: PRINT"  Wage Bill";TAB(i);USING"######";w
+8042 PRINT"  Ground Rent";TAB(i);USING"######";e
+8044 PRINT"  Loan Interest";TAB(i);USING"######";INT(l/100)
+8046 PRINT"  Player Purchase";TAB(i);USING"######";bi
+8047 PEN 3: PRINT"  TOTAL";TAB(i);USING"######";w+e+INT(l/100)+bi:PRINT:PRINT
+8048 n=(x9+os)-(w+e+INT(l/100)+bi):bi=0:os=0
+8049 PEN 2: PRINT"WEEKLY BALANCE";TAB(i-1);USING"#######";n:m=m-w-e-INT(l/100):xp=m-l:PEN 1
+8050 IF m>0 THEN 8060
+8051 l=l-m:m=0
+8056 PRINT"LOAN INCREASED TO PAY BILLS!"
+8060 IF l<250000*d2+1 THEN GOSUB 1060:RETURN
+8061 CLS
+8062 PRINT:PRINT"YOU OWE OVER �";250000*d2
+8064 PRINT:PRINT"YOU'VE BEEN SACKED BY THE CLUB!"
+8066 GOSUB 1060
+8067 STOP:REM PUT IN NEW
+8100 IF ml<15 OR fa=0 THEN 8299
+8130 CLS:LOCATE 10,15:PRINT"****End of Season****"
+8140 GOSUB 1060:GOSUB 7806
+8146 r1=17-t(t1-lt)
+8150 CLS:s=s+r1+c*2*d1:GOSUB 3200
+8220 m=m+r1*5000*d2:CLS:PRINT"League Success Bonus Money : �";r1*5000*d2:PRINT
+8230 s5=s5+1
+8240 FOR i=1 TO 16:GOSUB 8500:GOSUB 8600:NEXT
+8250 GOSUB 8800:GOSUB 1060
+8260 CLS:LOCATE 12,15:PRINT"****New Season****":PRINT
+8270 GOSUB 1100:GOSUB 1060
+8299 RETURN
+8500 IF t(i)>3 THEN 8579
+8515 IF d1=1 THEN 8570
+8520 PRINT t$(lt+i);TAB(12);"are promoted******":PRINT
+8530 x$=t$(lt-t(i)):t$(lt-t(i))=t$(lt+i):t$(lt+i)=x$
+8550 IF lt+i=t1 THEN t1=(lt-t(i))
+8552 y1=cl(lt-t(i),1):y2=cl(lt-t(i),2)
+8554 cl(lt-t(i),1)=cl(lt+i,1):cl(lt-t(i),2)=cl(lt+i,2)
+8556 cl(lt+i,1)=y1:cl(lt+i,2)=y2
+8560 GOTO 8579
+8570 IF t(i)=1 THEN PRINT t$(lt+i);TAB(12);"are League Champions******"
+8579 RETURN
+8600 IF d1=4 THEN 8660
+8610 IF t(i)<14 THEN 8660
+8620 PRINT t$(lt+i);TAB(12);"are relegated******":PRINT
+8630 x$=t$(d1*16+17-t(i))
+8640 t$(d1*16+17-t(i))=t$(lt+i):t$(lt+i)=x$
+8650 IF lt+i=t1 THEN t1=d1*16+17-t(i)
+8652 y1=cl(d1*16+17-t(i),1):y2=cl(d1*16+17-t(i),2)
+8654 cl(d1*16+17-t(i),1)=cl(lt+i,1):cl(d1*16+17-t(i),2)=cl(lt+i,2)
+8656 cl(lt+i,1)=y1:cl(lt+i,2)=y2
+8660 RETURN
+8700 IF ml=0 THEN 8780
+8702 r1=FN r(24)
+8704 IF p(r1)>0 THEN 8700
+8710 PEN 2: CLS:PRINT TAB(8);"****Transfer Market****":PRINT:PRINT:PEN 1:IF p1<16 THEN 8720
+8711 PRINT"You cannot buy a player because you have16 in your squad : that is the maximum  allowed under F.A. rules.":GOSUB 1060:GOTO 8780
+8720 GOSUB 1001:PRINT:PRINT te$:PRINT:GOSUB 2540
+8730 pl=r1:PEN (INT((pl-1)/8+1)):PRINT r$(INT((pl-1)/8+1));" ";p$(pl);TAB(16);:PRINT USING"##";pl;:PRINT TAB(22);r(pl);TAB(29);USING"##";y(pl);:PRINT TAB(32); USING"#######";v(pl);:PRINT" ";q$(p(pl)+ABS(p(pl)=0)):PEN 1 
+8740 PRINT:PRINT"Type your bid (�)"
+8742 GOSUB 1030
+8745 LOCATE 1,20:INPUT i:IF i=0 THEN 8780
+8755 IF m>=i THEN 8760
+8757 GOSUB 1010:GOSUB 1060:GOTO 8710
+8760 r=(FN r(10)*i)/v(r1):CLS:IF r>=5 THEN 8770
+8766 GOSUB 8785:GOSUB 1060:GOTO 8710
+8770 LOCATE 1,10
+8771 PRINT TAB((40-LEN(p$(r1))-21)/2);p$(r1);" has joined your team":bi=i
+8773 v(r1)=r(r1)*5000*d2
+8775 m=m-bi:p(r1)=1:GOSUB 1060
+8780 RETURN
+8785 v(r1)=INT(v(r1)+v(r1)/5)
+8786 LOCATE 10,15:PRINT"Your bid is refused":bi=0:RETURN
+8800 d1=INT(((t1-1)/16)+1):fa=0:lt=(d1-1)*16:lc=0:h=1:d2=5-d1:ma=1:ml=0:y=0:z=0
+8811 FOR i=1 TO 16:z(i)=0:t(i)=0:b(i)=0:c(i)=0:NEXT
+8819 v=0
+8820 FOR i=1 TO 24
+8824 v(i)=INT(5000*d2*FN r(5))
+8827 r(i)=INT(v(i)/(5000*d2))
+8830 y(i)=FN r(20)
+8832 NEXT
+8840 z(17)=-1:a(2)=10:g=5000*d2:c=0:e=500*d2:h1=2
+8890 RETURN
+8900 d1=0
+8902 d1=d1+1
+8905 IF d1>4 THEN 8900
+8910 CLS:PRINT"CHOOSE TEAM TO MANAGE :"
+8915 PEN 3: PRINT"NUMBER","NAME":lt=(d1-1)*16:PEN 1
+8920 FOR i=lt+1 TO lt+16:PRINT i,t$(i):NEXT
+8935 PEN 3: PRINT:PRINT"Type number of the team you want to     manage (or ENTER for more choice)":PEN 1
+8937 INPUT t1
+8940 IF t1=0 THEN 8902
+8945 IF t1<lt+1 OR t1>lt+16 THEN PRINT CHR$(7):GOTO 8910
+8947 d1=4:IF t1=64 THEN 8955
+8950 y$=t$(t1):y1=cl(t1,1):y2=cl(t1,2)
+8951 FOR i=t1+1 TO 64:t$(i-1)=t$(i):cl(i-1,1)=cl(i,1):cl(i-1,2)=cl(i,2):NEXT
+8952 t$(64)=y$:t1=64:cl(64,1)=y1:cl(64,2)=y2
+8955 CLS
+8957 FOR i=1 TO 7:PRINT i,l$(i):NEXT
+8960 PEN 3:PRINT: INPUT"Type your level: (1-7)";l1:PEN 1
+8965 IF l1<1 OR l1>7 THEN PRINT CHR$(7):GOTO 8955
+8966 IF mr=1 THEN RETURN
+8974 FOR i=1 TO 12
+8975 r=FN r(24)
+8980 IF p(r)>0 THEN 8975
+8985 p(r)=2:IF i=12 THEN p(r)=1
+8987 NEXT
+8990 GOSUB 8800:RETURN
+9000 FOR i=1 TO 24:READ p$(i):NEXT
+9010 DATA P.Shilton,N.Spink,P.Thompson,K.Sansom,G.McQueen,A.Martin,R.Osman,V.Anderson,R.Wilkins,G.Mabbutt,S.Lee
+9020 DATA T.Brooking,B.Robson,G.Hoddle,S.Williams,A.Muhren,G.Shaw,K.Dalglish,T.Woodcock,F.Stapleton,I.Rush,C.Nicholas,N.Whiteside,P.Mariner
+9155 FOR i=1 TO 7:READ a$(i):NEXT
+9180 DATA Energy,Morale,Defence,Midfield,Attack,Division,League Pos.
+9185 FOR i=1 TO 7:READ l$(i):NEXT
+9190 DATA Beginner,Novice,Average,Good,Expert,Super-Expert,Genius
+9200 FOR i=1 TO 64:READ t$(i):NEXT
+9225 DATA Arsenal,Aston V.,Coventry,Everton,Ipswich,Liverpool,Luton,Man.Utd.,Newcastle,Norwich,Notts.F.,Q.P.R.,Sheff Wed.
+9230 DATA Spurs,Watford,West Ham,Blackburn,Brighton,Cardiff,Carlisle,Charlton,Crystal P.,Fulham,Grimsby,Leeds,Man.City
+9235 DATA Middlesbro,Notts Co.,Oldham,Oxford,Portsmouth,Sheff Utd,Bournemouth,Brentford,Bristol R.,Cambridge,Doncaster,Hull,Lincoln,Millwall,Newport,Orient
+9240 DATA Plymouth,Preston,Reading,Rotherham,Walsall,York City,Blackpool,Bury,Colchester,Crewe,Darlington,Exeter
+9245 DATA Halifax, Hartlepool,Hereford,Mansfield,Port Vale,Rochdale,Scunthorpe,Stockport,Southend,Torquay
+9250 FOR i= 1 TO 19:READ x%(i,1),y%(i,1):NEXT
+9255 DATA 0,0,0,300,14,282,8,282,34,270,16,260,16,248,90,234,78,196,72,170,72,138,78,102,90,66,90,54,70,42,56,32,56,22,92,0,0,0
+9257 sn=SIN(PI/6):cs=COS(PI/6)
+9260 FOR l%=2 TO 12
+9262 FOR k%=1 TO 19
+9264 x%(k%,l%)=x%(k%,l%-1)*cs-z%(k%,l%-1)*sn:y%(k%,l%)=y%(k%,l%-1):z%(k%,l%)=z%(k%,l%-1)*cs+x%(k%,l%-1)*sn
+9266 NEXT:NEXT
+9270 FOR i=1 TO 3:READ q$(i),r$(i):NEXT
+9280 DATA " ",D,p,M,i,"A"
+9290 FOR i=1 TO 64:FOR i2=1 TO 2:READ cl(i,i2):NEXT:NEXT
+9300 DATA 6,24,4,24,14,6,2,15,2,24,6,24,24,15,6,24,0,24,24,15,6,24,2,6,2,24,24,14,15,24,4,24
+9310 DATA 2,18,2,24,2,24,6,24,6,24,24,14,24,6,0,6,24,15,14,24,6,24,0,24,2,15,2,24,2,24,6,24
+9320 DATA 6,24,6,1,2,21,15,24,24,21,15,24,6,21,2,6,15,24,6,1,24,15,24,15,2,24,24,6,6,1,6,14
+9330 DATA 15,24,24,15,2,6,6,14,24,1,6,21,2,24,2,6,24,6,15,24,24,15,2,21,14,24,2,24,24,6,24,15
+9340 SYMBOL AFTER 225
+9345 FOR i=225 TO 244:READ x1,x2,x3,x4,x5,x6,x7,x8
+9350 SYMBOL i,x1,x2,x3,x4,x5,x6,x7,x8:NEXT
+9352 DATA 90,90,126,24,24,60,36,0
+9355 DATA 24,88,126,26,120,72,206,2,48,48,24,60,28,56,48,40,24,24,30,58,24,42,36,32,24,24,24,28,60,24,28,8,24,24,60,90,90
+9360 DATA 60,36,102,0,0,0,0,0,0,3,3,24,26,126,88,30,18,115,64,12,12,24,60,56,28,12,20,24,24,120,92,24,84,36,4,24,24,24
+9365 DATA 56,60,24,56,8,0,0,0,0,0,0,192,192,24,24,61,90,56,28,20,36,24,24,188,90,28,56,40,36,12,12,60,91,152,62,64,192,48,48,60,218,25,124,2,3
+9370 DATA 24,24,60,90,90,60,36,0
+9372 DATA 24,24,60,90,90,60,36,0
+9375 DATA 26,26,62,88,88,36,36,0,88,88,124,26,26,36,36,0
+9380 sp$="":FOR i=1 TO 120:sp$=sp$+CHR$(INT(RND(1)*4+241)):NEXT
+9399 RETURN
+9400 CLS
+9405 PRINT"Do you want to change any team names    (y/n)?";:INPUT i$:i$=LOWER$(i$)
+9410 IF LEFT$(i$,1)<>"y" THEN 9499
+9415 d3=0
+9420 d3=d3+1
+9425 IF d3>4 THEN 9415
+9430 CLS:PEN 2:PRINT a$(6);d3
+9435 PRINT"NUMBER","NAME":low=(d3-1)*16:PEN 1
+9440 FOR i=low+1 TO low+16:PRINT i,t$(i):NEXT
+9445 PRINT:PEN 3:PRINT"Type no. of team to be changed          (or ENTER for more choice)"
+9450 INPUT i:IF i=0 THEN 9420
+9455 IF i<low+1 OR i>low+16 THEN PRINT"TEAM NO. OUT OF RANGE!":GOTO 9450
+9460 PRINT:PRINT"Present team is ";t$(i)
+9465 INPUT"Type new team name";i$
+9467 IF LEN(i$)=0 THEN 9465
+9474 IF LEN(i$)>12 THEN PRINT"TEAM NAME TOO LONG: max 12 characters";CHR$(7):GOTO 9465
+9478 t$(i)=i$:PRINT"New team name is ";t$(i)
+9479 PRINT"Any more changes";:INPUT i$:i$=LOWER$(i$)
+9480 IF LEFT$(i$,1)="y" THEN 9430
+9499 RETURN
+9500 CLS
+9505 PRINT"Do you want to change any player names  (y/n) ";:INPUT i$:i$=LOWER$(i$)
+9510 IF LEFT$(i$,1)<>"y" THEN 9599
+9515 d3=0
+9516 d3=d3+1
+9520 IF d3>3 THEN 9515
+9525 CLS:PEN 2:PRINT a$(d3+2)
+9530 PRINT"NUMBER","NAME":PEN 1:low=(d3-1)*8
+9535 FOR i=low+1 TO low+8:PRINT i,p$(i):NEXT
+9540 PRINT:PRINT"Type no. of player to be changed        (or ENTER for more choice)"
+9545 INPUT i:IF i=0 THEN 9516
+9550 IF i<low+1 OR i>low+8 THEN PRINT"PLAYER NUMBER OUT OF RANGE!":GOTO 9545
+9555 PRINT"Present player is ";p$(i)
+9560 INPUT"Type new player name ";i$
+9561 IF LEN(i$)=0 THEN 9560
+9570 IF LEN(i$)>12 THEN PRINT"PLAYER NAME TOO LONG : max 12 characters";CHR$(7):GOTO 9560
+9575 p$(i)=i$:PRINT"New player name is ";p$(i)
+9580 PRINT"Any more changes (y/n) ";:INPUT i$:i$=LOWER$(i$)
+9585 IF LEFT$(i$,1)="y" THEN 9525
+9599 RETURN
+9999 FOR i=32512 TO 32512+200:PRINT i,PEEK(i),STR$(PEEK(i)):NEXT
